@@ -1,0 +1,791 @@
+{
+  "users": [
+    {
+      "id": "u_citizen",
+      "name": "Aarav Sharma",
+      "email": "citizen@example.com",
+      "role": "citizen",
+      "passwordHash": "$2b$10$.fwb.Ky3A2M7Af/RwUeC6Oa8JmDDv8EZRaKB/y7j7t8VQv5KNVEWq"
+    },
+    {
+      "id": "u_off_health",
+      "name": "PIO, Health & Family Welfare",
+      "email": "officer.health@gov.in",
+      "role": "officer",
+      "departmentId": "health",
+      "passwordHash": "$2b$10$ZiADnvoMZ3.RGPMh6yRkrOkgalGVnWZaZB3JjZqpRdLNrJW3uEVSm"
+    },
+    {
+      "id": "u_off_education",
+      "name": "PIO, School & Higher Education",
+      "email": "officer.education@gov.in",
+      "role": "officer",
+      "departmentId": "education",
+      "passwordHash": "$2b$10$ZiADnvoMZ3.RGPMh6yRkrOkgalGVnWZaZB3JjZqpRdLNrJW3uEVSm"
+    },
+    {
+      "id": "u_off_works",
+      "name": "PIO, Public Works (Roads & Bridges)",
+      "email": "officer.works@gov.in",
+      "role": "officer",
+      "departmentId": "works",
+      "passwordHash": "$2b$10$ZiADnvoMZ3.RGPMh6yRkrOkgalGVnWZaZB3JjZqpRdLNrJW3uEVSm"
+    },
+    {
+      "id": "u_off_municipal",
+      "name": "PIO, Urban Local Bodies / Municipal",
+      "email": "officer.municipal@gov.in",
+      "role": "officer",
+      "departmentId": "municipal",
+      "passwordHash": "$2b$10$ZiADnvoMZ3.RGPMh6yRkrOkgalGVnWZaZB3JjZqpRdLNrJW3uEVSm"
+    },
+    {
+      "id": "u_off_water",
+      "name": "PIO, Water Supply & Sanitation",
+      "email": "officer.water@gov.in",
+      "role": "officer",
+      "departmentId": "water",
+      "passwordHash": "$2b$10$ZiADnvoMZ3.RGPMh6yRkrOkgalGVnWZaZB3JjZqpRdLNrJW3uEVSm"
+    },
+    {
+      "id": "u_off_power",
+      "name": "PIO, Power & Electricity",
+      "email": "officer.power@gov.in",
+      "role": "officer",
+      "departmentId": "power",
+      "passwordHash": "$2b$10$ZiADnvoMZ3.RGPMh6yRkrOkgalGVnWZaZB3JjZqpRdLNrJW3uEVSm"
+    },
+    {
+      "id": "u_off_police",
+      "name": "PIO, Home & Police",
+      "email": "officer.police@gov.in",
+      "role": "officer",
+      "departmentId": "police",
+      "passwordHash": "$2b$10$ZiADnvoMZ3.RGPMh6yRkrOkgalGVnWZaZB3JjZqpRdLNrJW3uEVSm"
+    },
+    {
+      "id": "u_off_revenue",
+      "name": "PIO, Revenue & Land Records",
+      "email": "officer.revenue@gov.in",
+      "role": "officer",
+      "departmentId": "revenue",
+      "passwordHash": "$2b$10$ZiADnvoMZ3.RGPMh6yRkrOkgalGVnWZaZB3JjZqpRdLNrJW3uEVSm"
+    },
+    {
+      "id": "u_off_transport",
+      "name": "PIO, Transport",
+      "email": "officer.transport@gov.in",
+      "role": "officer",
+      "departmentId": "transport",
+      "passwordHash": "$2b$10$ZiADnvoMZ3.RGPMh6yRkrOkgalGVnWZaZB3JjZqpRdLNrJW3uEVSm"
+    },
+    {
+      "id": "u_off_food",
+      "name": "PIO, Food & Civil Supplies",
+      "email": "officer.food@gov.in",
+      "role": "officer",
+      "departmentId": "food",
+      "passwordHash": "$2b$10$ZiADnvoMZ3.RGPMh6yRkrOkgalGVnWZaZB3JjZqpRdLNrJW3uEVSm"
+    },
+    {
+      "id": "u_off_welfare",
+      "name": "PIO, Social Welfare",
+      "email": "officer.welfare@gov.in",
+      "role": "officer",
+      "departmentId": "welfare",
+      "passwordHash": "$2b$10$ZiADnvoMZ3.RGPMh6yRkrOkgalGVnWZaZB3JjZqpRdLNrJW3uEVSm"
+    },
+    {
+      "id": "u_off_agri",
+      "name": "PIO, Agriculture & Farmers",
+      "email": "officer.agri@gov.in",
+      "role": "officer",
+      "departmentId": "agri",
+      "passwordHash": "$2b$10$ZiADnvoMZ3.RGPMh6yRkrOkgalGVnWZaZB3JjZqpRdLNrJW3uEVSm"
+    },
+    {
+      "id": "u_off_finance",
+      "name": "PIO, Finance & Treasury",
+      "email": "officer.finance@gov.in",
+      "role": "officer",
+      "departmentId": "finance",
+      "passwordHash": "$2b$10$ZiADnvoMZ3.RGPMh6yRkrOkgalGVnWZaZB3JjZqpRdLNrJW3uEVSm"
+    }
+  ],
+  "records": [
+    {
+      "id": "RTI-2025-0001",
+      "userId": "u_archive",
+      "applicantName": "Archived Applicant",
+      "subject": "Copies of vaccination records and stock position of vaccines at the District Hospital for 2023-24",
+      "description": "Copies of vaccination records and stock position of vaccines at the District Hospital for 2023-24",
+      "bpl": false,
+      "urgent": false,
+      "fee": 10,
+      "createdAt": "2026-02-15T09:07:14.853Z",
+      "dueDate": "2026-03-17T09:07:14.853Z",
+      "status": "responded",
+      "departmentId": "health",
+      "ai": {
+        "category": "health",
+        "departmentId": "health",
+        "similar": [],
+        "engine": "seed",
+        "confidence": 95,
+        "keywords": [],
+        "summary": "Copies of vaccination records and stock position of vaccines at the District Hospital for 2023-24"
+      },
+      "draft": "The District Hospital maintains a vaccine stock register. Month-wise vaccination figures for 2023-24 are enclosed as Annexure-A. Stock position as on 31 March 2024 is provided in Annexure-B.",
+      "finalResponse": "The District Hospital maintains a vaccine stock register. Month-wise vaccination figures for 2023-24 are enclosed as Annexure-A. Stock position as on 31 March 2024 is provided in Annexure-B.",
+      "responseDate": "2026-02-21T09:07:14.853Z",
+      "timeline": [
+        {
+          "at": "2026-02-15T09:07:14.853Z",
+          "status": "submitted",
+          "note": "Application received"
+        },
+        {
+          "at": "2026-02-21T09:07:14.853Z",
+          "status": "responded",
+          "note": "Response issued by PIO"
+        }
+      ]
+    },
+    {
+      "id": "RTI-2025-0002",
+      "userId": "u_archive",
+      "applicantName": "Archived Applicant",
+      "subject": "Details of mid-day meal expenditure and inspection reports of Government Primary Schools in the block",
+      "description": "Details of mid-day meal expenditure and inspection reports of Government Primary Schools in the block",
+      "bpl": false,
+      "urgent": false,
+      "fee": 10,
+      "createdAt": "2026-03-02T09:07:14.853Z",
+      "dueDate": "2026-04-01T09:07:14.853Z",
+      "status": "responded",
+      "departmentId": "education",
+      "ai": {
+        "category": "education",
+        "departmentId": "education",
+        "similar": [],
+        "engine": "seed",
+        "confidence": 95,
+        "keywords": [],
+        "summary": "Details of mid-day meal expenditure and inspection reports of Government Primary Schools in the block"
+      },
+      "draft": "Mid-day meal expenditure of the block for the last financial year is provided school-wise in the enclosed statement. Inspection reports of the last two quarters are attached.",
+      "finalResponse": "Mid-day meal expenditure of the block for the last financial year is provided school-wise in the enclosed statement. Inspection reports of the last two quarters are attached.",
+      "responseDate": "2026-03-09T09:07:14.853Z",
+      "timeline": [
+        {
+          "at": "2026-03-02T09:07:14.853Z",
+          "status": "submitted",
+          "note": "Application received"
+        },
+        {
+          "at": "2026-03-09T09:07:14.853Z",
+          "status": "responded",
+          "note": "Response issued by PIO"
+        }
+      ]
+    },
+    {
+      "id": "RTI-2025-0003",
+      "userId": "u_archive",
+      "applicantName": "Archived Applicant",
+      "subject": "Status of repair work, tender and contractor details for the city bypass road with potholes",
+      "description": "Status of repair work, tender and contractor details for the city bypass road with potholes",
+      "bpl": false,
+      "urgent": false,
+      "fee": 10,
+      "createdAt": "2026-03-17T09:07:14.854Z",
+      "dueDate": "2026-04-16T09:07:14.854Z",
+      "status": "responded",
+      "departmentId": "works",
+      "ai": {
+        "category": "works",
+        "departmentId": "works",
+        "similar": [],
+        "engine": "seed",
+        "confidence": 95,
+        "keywords": [],
+        "summary": "Status of repair work, tender and contractor details for the city bypass road with potholes"
+      },
+      "draft": "The repair of the city bypass was awarded through e-tender. Contractor name, work order date and completion status are enclosed. Pothole patchwork is scheduled after the monsoon.",
+      "finalResponse": "The repair of the city bypass was awarded through e-tender. Contractor name, work order date and completion status are enclosed. Pothole patchwork is scheduled after the monsoon.",
+      "responseDate": "2026-03-25T09:07:14.854Z",
+      "timeline": [
+        {
+          "at": "2026-03-17T09:07:14.854Z",
+          "status": "submitted",
+          "note": "Application received"
+        },
+        {
+          "at": "2026-03-25T09:07:14.854Z",
+          "status": "responded",
+          "note": "Response issued by PIO"
+        }
+      ]
+    },
+    {
+      "id": "RTI-2025-0004",
+      "userId": "u_archive",
+      "applicantName": "Archived Applicant",
+      "subject": "Complaints received and action taken on garbage collection and sanitation in Ward 12",
+      "description": "Complaints received and action taken on garbage collection and sanitation in Ward 12",
+      "bpl": false,
+      "urgent": false,
+      "fee": 10,
+      "createdAt": "2026-04-01T09:07:14.854Z",
+      "dueDate": "2026-05-01T09:07:14.854Z",
+      "status": "responded",
+      "departmentId": "municipal",
+      "ai": {
+        "category": "municipal",
+        "departmentId": "municipal",
+        "similar": [],
+        "engine": "seed",
+        "confidence": 95,
+        "keywords": [],
+        "summary": "Complaints received and action taken on garbage collection and sanitation in Ward 12"
+      },
+      "draft": "A total of 46 complaints were received for Ward 12. Action-taken details are annexed. Daily door-to-door collection has been assigned to a new contractor.",
+      "finalResponse": "A total of 46 complaints were received for Ward 12. Action-taken details are annexed. Daily door-to-door collection has been assigned to a new contractor.",
+      "responseDate": "2026-04-10T09:07:14.854Z",
+      "timeline": [
+        {
+          "at": "2026-04-01T09:07:14.854Z",
+          "status": "submitted",
+          "note": "Application received"
+        },
+        {
+          "at": "2026-04-10T09:07:14.854Z",
+          "status": "responded",
+          "note": "Response issued by PIO"
+        }
+      ]
+    },
+    {
+      "id": "RTI-2025-0005",
+      "userId": "u_archive",
+      "applicantName": "Archived Applicant",
+      "subject": "Information on drinking water supply schedule and pipeline repair works in village Rampur",
+      "description": "Information on drinking water supply schedule and pipeline repair works in village Rampur",
+      "bpl": false,
+      "urgent": false,
+      "fee": 10,
+      "createdAt": "2026-04-16T09:07:14.854Z",
+      "dueDate": "2026-05-16T09:07:14.854Z",
+      "status": "responded",
+      "departmentId": "water",
+      "ai": {
+        "category": "water",
+        "departmentId": "water",
+        "similar": [],
+        "engine": "seed",
+        "confidence": 95,
+        "keywords": [],
+        "summary": "Information on drinking water supply schedule and pipeline repair works in village Rampur"
+      },
+      "draft": "Water supply in village Rampur is provided twice daily (6-8 AM and 5-7 PM). Pipeline repair work was completed on the date mentioned in the enclosed completion certificate.",
+      "finalResponse": "Water supply in village Rampur is provided twice daily (6-8 AM and 5-7 PM). Pipeline repair work was completed on the date mentioned in the enclosed completion certificate.",
+      "responseDate": "2026-04-26T09:07:14.854Z",
+      "timeline": [
+        {
+          "at": "2026-04-16T09:07:14.854Z",
+          "status": "submitted",
+          "note": "Application received"
+        },
+        {
+          "at": "2026-04-26T09:07:14.854Z",
+          "status": "responded",
+          "note": "Response issued by PIO"
+        }
+      ]
+    },
+    {
+      "id": "RTI-2025-0006",
+      "userId": "u_archive",
+      "applicantName": "Archived Applicant",
+      "subject": "Number of electricity transformer failures and average restoration time in the sub-division",
+      "description": "Number of electricity transformer failures and average restoration time in the sub-division",
+      "bpl": false,
+      "urgent": false,
+      "fee": 10,
+      "createdAt": "2026-05-01T09:07:14.854Z",
+      "dueDate": "2026-05-31T09:07:14.854Z",
+      "status": "responded",
+      "departmentId": "power",
+      "ai": {
+        "category": "power",
+        "departmentId": "power",
+        "similar": [],
+        "engine": "seed",
+        "confidence": 95,
+        "keywords": [],
+        "summary": "Number of electricity transformer failures and average restoration time in the sub-division"
+      },
+      "draft": "During the last year, transformer failures in the sub-division are listed month-wise in the annexure. Average restoration time was 14 hours.",
+      "finalResponse": "During the last year, transformer failures in the sub-division are listed month-wise in the annexure. Average restoration time was 14 hours.",
+      "responseDate": "2026-05-12T09:07:14.854Z",
+      "timeline": [
+        {
+          "at": "2026-05-01T09:07:14.854Z",
+          "status": "submitted",
+          "note": "Application received"
+        },
+        {
+          "at": "2026-05-12T09:07:14.854Z",
+          "status": "responded",
+          "note": "Response issued by PIO"
+        }
+      ]
+    },
+    {
+      "id": "RTI-2025-0007",
+      "userId": "u_archive",
+      "applicantName": "Archived Applicant",
+      "subject": "Status of FIR and action taken report on theft complaint filed at the police station",
+      "description": "Status of FIR and action taken report on theft complaint filed at the police station",
+      "bpl": false,
+      "urgent": false,
+      "fee": 10,
+      "createdAt": "2026-05-16T09:07:14.854Z",
+      "dueDate": "2026-06-15T09:07:14.854Z",
+      "status": "responded",
+      "departmentId": "police",
+      "ai": {
+        "category": "police",
+        "departmentId": "police",
+        "similar": [],
+        "engine": "seed",
+        "confidence": 95,
+        "keywords": [],
+        "summary": "Status of FIR and action taken report on theft complaint filed at the police station"
+      },
+      "draft": "The FIR was registered and investigation is in progress. Under Section 8(1)(h) of the RTI Act, details that may impede the investigation cannot be disclosed at this stage.",
+      "finalResponse": "The FIR was registered and investigation is in progress. Under Section 8(1)(h) of the RTI Act, details that may impede the investigation cannot be disclosed at this stage.",
+      "responseDate": "2026-05-28T09:07:14.854Z",
+      "timeline": [
+        {
+          "at": "2026-05-16T09:07:14.854Z",
+          "status": "submitted",
+          "note": "Application received"
+        },
+        {
+          "at": "2026-05-28T09:07:14.854Z",
+          "status": "responded",
+          "note": "Response issued by PIO"
+        }
+      ]
+    },
+    {
+      "id": "RTI-2025-0008",
+      "userId": "u_archive",
+      "applicantName": "Archived Applicant",
+      "subject": "Copy of land mutation record and khasra details for plot in Tehsil",
+      "description": "Copy of land mutation record and khasra details for plot in Tehsil",
+      "bpl": false,
+      "urgent": false,
+      "fee": 10,
+      "createdAt": "2026-05-31T09:07:14.854Z",
+      "dueDate": "2026-06-30T09:07:14.854Z",
+      "status": "responded",
+      "departmentId": "revenue",
+      "ai": {
+        "category": "revenue",
+        "departmentId": "revenue",
+        "similar": [],
+        "engine": "seed",
+        "confidence": 95,
+        "keywords": [],
+        "summary": "Copy of land mutation record and khasra details for plot in Tehsil"
+      },
+      "draft": "Certified copy of the mutation entry and khasra details are enclosed upon payment of the prescribed copying fee. Record is available with the Patwari.",
+      "finalResponse": "Certified copy of the mutation entry and khasra details are enclosed upon payment of the prescribed copying fee. Record is available with the Patwari.",
+      "responseDate": "2026-06-13T09:07:14.854Z",
+      "timeline": [
+        {
+          "at": "2026-05-31T09:07:14.854Z",
+          "status": "submitted",
+          "note": "Application received"
+        },
+        {
+          "at": "2026-06-13T09:07:14.854Z",
+          "status": "responded",
+          "note": "Response issued by PIO"
+        }
+      ]
+    },
+    {
+      "id": "RTI-2025-0009",
+      "userId": "u_archive",
+      "applicantName": "Archived Applicant",
+      "subject": "Details of driving licence applications pending and bus permits issued by the RTO",
+      "description": "Details of driving licence applications pending and bus permits issued by the RTO",
+      "bpl": false,
+      "urgent": false,
+      "fee": 10,
+      "createdAt": "2026-06-15T09:07:14.854Z",
+      "dueDate": "2026-07-15T09:07:14.854Z",
+      "status": "responded",
+      "departmentId": "transport",
+      "ai": {
+        "category": "transport",
+        "departmentId": "transport",
+        "similar": [],
+        "engine": "seed",
+        "confidence": 95,
+        "keywords": [],
+        "summary": "Details of driving licence applications pending and bus permits issued by the RTO"
+      },
+      "draft": "As on date, 212 driving licence applications are pending, all within the service-level timeline. Bus permits issued in the last year are listed in the annexure.",
+      "finalResponse": "As on date, 212 driving licence applications are pending, all within the service-level timeline. Bus permits issued in the last year are listed in the annexure.",
+      "responseDate": "2026-06-29T09:07:14.854Z",
+      "timeline": [
+        {
+          "at": "2026-06-15T09:07:14.854Z",
+          "status": "submitted",
+          "note": "Application received"
+        },
+        {
+          "at": "2026-06-29T09:07:14.854Z",
+          "status": "responded",
+          "note": "Response issued by PIO"
+        }
+      ]
+    },
+    {
+      "id": "RTI-2025-0010",
+      "userId": "u_archive",
+      "applicantName": "Archived Applicant",
+      "subject": "Ration card allotment list and fair price shop stock register for the village",
+      "description": "Ration card allotment list and fair price shop stock register for the village",
+      "bpl": false,
+      "urgent": false,
+      "fee": 10,
+      "createdAt": "2026-06-30T09:07:14.854Z",
+      "dueDate": "2026-07-30T09:07:14.854Z",
+      "status": "responded",
+      "departmentId": "food",
+      "ai": {
+        "category": "food",
+        "departmentId": "food",
+        "similar": [],
+        "engine": "seed",
+        "confidence": 95,
+        "keywords": [],
+        "summary": "Ration card allotment list and fair price shop stock register for the village"
+      },
+      "draft": "The ration card allotment list and stock register of the fair price shop are publicly available under Section 4 and are enclosed with this reply.",
+      "finalResponse": "The ration card allotment list and stock register of the fair price shop are publicly available under Section 4 and are enclosed with this reply.",
+      "responseDate": "2026-07-06T09:07:14.854Z",
+      "timeline": [
+        {
+          "at": "2026-06-30T09:07:14.854Z",
+          "status": "submitted",
+          "note": "Application received"
+        },
+        {
+          "at": "2026-07-06T09:07:14.854Z",
+          "status": "responded",
+          "note": "Response issued by PIO"
+        }
+      ]
+    },
+    {
+      "id": "RTI-2025-0011",
+      "userId": "u_archive",
+      "applicantName": "Archived Applicant",
+      "subject": "Beneficiary list and sanction status under old-age pension and widow pension schemes",
+      "description": "Beneficiary list and sanction status under old-age pension and widow pension schemes",
+      "bpl": false,
+      "urgent": false,
+      "fee": 10,
+      "createdAt": "2026-07-15T09:07:14.854Z",
+      "dueDate": "2026-08-14T09:07:14.854Z",
+      "status": "responded",
+      "departmentId": "welfare",
+      "ai": {
+        "category": "welfare",
+        "departmentId": "welfare",
+        "similar": [],
+        "engine": "seed",
+        "confidence": 95,
+        "keywords": [],
+        "summary": "Beneficiary list and sanction status under old-age pension and widow pension schemes"
+      },
+      "draft": "The beneficiary list with sanction status is enclosed. Personal bank details have been withheld under Section 8(1)(j) of the RTI Act.",
+      "finalResponse": "The beneficiary list with sanction status is enclosed. Personal bank details have been withheld under Section 8(1)(j) of the RTI Act.",
+      "responseDate": "2026-07-22T09:07:14.854Z",
+      "timeline": [
+        {
+          "at": "2026-07-15T09:07:14.854Z",
+          "status": "submitted",
+          "note": "Application received"
+        },
+        {
+          "at": "2026-07-22T09:07:14.854Z",
+          "status": "responded",
+          "note": "Response issued by PIO"
+        }
+      ]
+    },
+    {
+      "id": "RTI-2025-0012",
+      "userId": "u_archive",
+      "applicantName": "Archived Applicant",
+      "subject": "Details of fertilizer subsidy and crop insurance claims paid to farmers of the district",
+      "description": "Details of fertilizer subsidy and crop insurance claims paid to farmers of the district",
+      "bpl": false,
+      "urgent": false,
+      "fee": 10,
+      "createdAt": "2026-07-30T09:07:14.854Z",
+      "dueDate": "2026-08-29T09:07:14.854Z",
+      "status": "responded",
+      "departmentId": "agri",
+      "ai": {
+        "category": "agri",
+        "departmentId": "agri",
+        "similar": [],
+        "engine": "seed",
+        "confidence": 95,
+        "keywords": [],
+        "summary": "Details of fertilizer subsidy and crop insurance claims paid to farmers of the district"
+      },
+      "draft": "Fertilizer subsidy released and crop insurance claims settled in the district are provided block-wise in the enclosed statement.",
+      "finalResponse": "Fertilizer subsidy released and crop insurance claims settled in the district are provided block-wise in the enclosed statement.",
+      "responseDate": "2026-08-07T09:07:14.854Z",
+      "timeline": [
+        {
+          "at": "2026-07-30T09:07:14.854Z",
+          "status": "submitted",
+          "note": "Application received"
+        },
+        {
+          "at": "2026-08-07T09:07:14.854Z",
+          "status": "responded",
+          "note": "Response issued by PIO"
+        }
+      ]
+    },
+    {
+      "id": "RTI-2025-0013",
+      "userId": "u_archive",
+      "applicantName": "Archived Applicant",
+      "subject": "Budget allocation and expenditure statement of the district for the last financial year",
+      "description": "Budget allocation and expenditure statement of the district for the last financial year",
+      "bpl": false,
+      "urgent": false,
+      "fee": 10,
+      "createdAt": "2026-08-14T09:07:14.854Z",
+      "dueDate": "2026-09-13T09:07:14.854Z",
+      "status": "responded",
+      "departmentId": "finance",
+      "ai": {
+        "category": "finance",
+        "departmentId": "finance",
+        "similar": [],
+        "engine": "seed",
+        "confidence": 95,
+        "keywords": [],
+        "summary": "Budget allocation and expenditure statement of the district for the last financial year"
+      },
+      "draft": "The department-wise budget allocation and expenditure statement for the last financial year is attached as Annexure-1.",
+      "finalResponse": "The department-wise budget allocation and expenditure statement for the last financial year is attached as Annexure-1.",
+      "responseDate": "2026-08-23T09:07:14.854Z",
+      "timeline": [
+        {
+          "at": "2026-08-14T09:07:14.854Z",
+          "status": "submitted",
+          "note": "Application received"
+        },
+        {
+          "at": "2026-08-23T09:07:14.854Z",
+          "status": "responded",
+          "note": "Response issued by PIO"
+        }
+      ]
+    },
+    {
+      "id": "RTI-2025-0014",
+      "userId": "u_archive",
+      "applicantName": "Archived Applicant",
+      "subject": "Number of doctors and nurses posted and vacant posts at the Community Health Centre",
+      "description": "Number of doctors and nurses posted and vacant posts at the Community Health Centre",
+      "bpl": false,
+      "urgent": false,
+      "fee": 10,
+      "createdAt": "2026-08-29T09:07:14.854Z",
+      "dueDate": "2026-09-28T09:07:14.854Z",
+      "status": "responded",
+      "departmentId": "health",
+      "ai": {
+        "category": "health",
+        "departmentId": "health",
+        "similar": [],
+        "engine": "seed",
+        "confidence": 95,
+        "keywords": [],
+        "summary": "Number of doctors and nurses posted and vacant posts at the Community Health Centre"
+      },
+      "draft": "Sanctioned posts, working strength and vacant posts of doctors and nurses at the Community Health Centre are enclosed in tabular form.",
+      "finalResponse": "Sanctioned posts, working strength and vacant posts of doctors and nurses at the Community Health Centre are enclosed in tabular form.",
+      "responseDate": "2026-09-08T09:07:14.854Z",
+      "timeline": [
+        {
+          "at": "2026-08-29T09:07:14.854Z",
+          "status": "submitted",
+          "note": "Application received"
+        },
+        {
+          "at": "2026-09-08T09:07:14.854Z",
+          "status": "responded",
+          "note": "Response issued by PIO"
+        }
+      ]
+    },
+    {
+      "id": "RTI-2025-0015",
+      "userId": "u_archive",
+      "applicantName": "Archived Applicant",
+      "subject": "Scholarship disbursement list and pending applications for SC/ST students in the college",
+      "description": "Scholarship disbursement list and pending applications for SC/ST students in the college",
+      "bpl": false,
+      "urgent": false,
+      "fee": 10,
+      "createdAt": "2026-09-13T09:07:14.854Z",
+      "dueDate": "2026-10-13T09:07:14.854Z",
+      "status": "responded",
+      "departmentId": "education",
+      "ai": {
+        "category": "education",
+        "departmentId": "education",
+        "similar": [],
+        "engine": "seed",
+        "confidence": 95,
+        "keywords": [],
+        "summary": "Scholarship disbursement list and pending applications for SC/ST students in the college"
+      },
+      "draft": "Scholarship disbursement details are provided in the enclosed list. 38 applications are pending verification and will be cleared within the current quarter.",
+      "finalResponse": "Scholarship disbursement details are provided in the enclosed list. 38 applications are pending verification and will be cleared within the current quarter.",
+      "responseDate": "2026-09-24T09:07:14.854Z",
+      "timeline": [
+        {
+          "at": "2026-09-13T09:07:14.854Z",
+          "status": "submitted",
+          "note": "Application received"
+        },
+        {
+          "at": "2026-09-24T09:07:14.854Z",
+          "status": "responded",
+          "note": "Response issued by PIO"
+        }
+      ]
+    },
+    {
+      "id": "RTI-2026-0016",
+      "userId": "u_citizen",
+      "applicantName": "Aarav Sharma",
+      "applicantEmail": "citizen@example.com",
+      "subject": "Status of city work",
+      "description": "Sample testing..............................................",
+      "bpl": false,
+      "urgent": false,
+      "fee": 10,
+      "createdAt": "2026-11-02T09:11:04.453Z",
+      "dueDate": "2026-12-02T09:11:04.453Z",
+      "status": "under_review",
+      "departmentId": "finance",
+      "ai": {
+        "departmentId": "finance",
+        "category": "General Administration",
+        "priority": "normal",
+        "summary": "Request for information regarding: Status of city work",
+        "keywords": [],
+        "confidence": 25,
+        "exemptionFlag": null,
+        "isValidRequest": true,
+        "engine": "rules",
+        "similar": [
+          {
+            "id": "RTI-2025-0003",
+            "subject": "Status of repair work, tender and contractor details for the city bypass road with potholes",
+            "departmentId": "works",
+            "score": 23
+          }
+        ]
+      },
+      "draft": "To,\nAarav Sharma\n\nSubject: Reply to RTI Application No. RTI-2026-0016 dated 2/11/2026 – Status of city work\n\nSir/Madam,\n\nThis refers to your application under Section 6(1) of the Right to Information Act, 2005, received in the Finance & Treasury Department on 2/11/2026.\n\nPoint-wise information:\n[Officer: insert the requested information / list enclosed annexures here]\n\n--- Precedent for officer guidance (delete before sending) ---\n• RTI-2025-0003 (Status of repair work, tender and contractor details for the city bypass road with potholes): The repair of the city bypass was awarded through e-tender. Contractor name, work order date and completion status are enclosed. Pothole patchwork is scheduled after the monsoon.…\n---------------------------------------------------------------\n\nIf you are not satisfied with this reply, you may file a first appeal under Section 19(1) of the RTI Act, 2005 before the First Appellate Authority of this department within 30 days of receipt of this reply.\n\nYours faithfully,\nPublic Information Officer\nFinance & Treasury",
+      "finalResponse": null,
+      "timeline": [
+        {
+          "at": "2026-11-02T09:11:04.453Z",
+          "status": "submitted",
+          "note": "Application received"
+        },
+        {
+          "at": "2026-11-02T09:11:04.453Z",
+          "status": "under_review",
+          "note": "Routed to Finance & Treasury by AI triage (rules, 25% confidence)"
+        }
+      ]
+    },
+    {
+      "id": "RTI-2026-0017",
+      "userId": "u_citizen",
+      "applicantName": "Aarav Sharma",
+      "applicantEmail": "citizen@example.com",
+      "subject": "Rood repair",
+      "description": "testing 2 is going on .................................",
+      "bpl": true,
+      "urgent": true,
+      "fee": 0,
+      "createdAt": "2026-11-03T09:08:32.499Z",
+      "dueDate": "2026-11-05T09:08:32.499Z",
+      "status": "under_review",
+      "departmentId": "works",
+      "ai": {
+        "departmentId": "works",
+        "category": "Public Works (Roads & Bridges)",
+        "priority": "normal",
+        "summary": "Request for information regarding: Rood repair",
+        "keywords": [
+          "repair"
+        ],
+        "confidence": 95,
+        "exemptionFlag": null,
+        "isValidRequest": true,
+        "engine": "rules",
+        "similar": [
+          {
+            "id": "RTI-2025-0003",
+            "subject": "Status of repair work, tender and contractor details for the city bypass road with potholes",
+            "departmentId": "works",
+            "score": 31
+          },
+          {
+            "id": "RTI-2025-0005",
+            "subject": "Information on drinking water supply schedule and pipeline repair works in village Rampur",
+            "departmentId": "water",
+            "score": 19
+          }
+        ]
+      },
+      "draft": "To,\nAarav Sharma\n\nSubject: Reply to RTI Application No. RTI-2026-0017 dated 3/11/2026 – Rood repair\n\nSir/Madam,\n\nThis refers to your application under Section 6(1) of the Right to Information Act, 2005, received in the Public Works (Roads & Bridges) Department on 3/11/2026.\n\nPoint-wise information:\n[Officer: insert the requested information / list enclosed annexures here]\n\n--- Precedent for officer guidance (delete before sending) ---\n• RTI-2025-0003 (Status of repair work, tender and contractor details for the city bypass road with potholes): The repair of the city bypass was awarded through e-tender. Contractor name, work order date and completion status are enclosed. Pothole patchwork is scheduled after the monsoon.…\n• RTI-2025-0005 (Information on drinking water supply schedule and pipeline repair works in village Rampur): Water supply in village Rampur is provided twice daily (6-8 AM and 5-7 PM). Pipeline repair work was completed on the date mentioned in the enclosed completion certificate.…\n---------------------------------------------------------------\n\nIf you are not satisfied with this reply, you may file a first appeal under Section 19(1) of the RTI Act, 2005 before the First Appellate Authority of this department within 30 days of receipt of this reply.\n\nYours faithfully,\nPublic Information Officer\nPublic Works (Roads & Bridges)",
+      "finalResponse": null,
+      "timeline": [
+        {
+          "at": "2026-11-03T09:08:32.499Z",
+          "status": "submitted",
+          "note": "Application received"
+        },
+        {
+          "at": "2026-11-03T09:08:32.499Z",
+          "status": "under_review",
+          "note": "Routed to Public Works (Roads & Bridges) by AI triage (rules, 95% confidence)"
+        }
+      ]
+    }
+  ]
+}

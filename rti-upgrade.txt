@@ -1,0 +1,953 @@
+@@@FILE app/globals.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-slate-50 text-slate-800 antialiased; }
+  ::selection { background: #c7d2fe; }
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-thumb { @apply rounded-full bg-indigo-300; }
+}
+
+@layer components {
+  .card { @apply rounded-2xl border border-white/70 bg-white/80 shadow-xl shadow-indigo-900/5 backdrop-blur; }
+  .card-hover { @apply transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-indigo-500/20; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-primary { @apply btn relative overflow-hidden bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/30 hover:brightness-110 active:scale-95; }
+  .btn-primary::after { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%); transform: translateX(-100%); transition: transform .7s; }
+  .btn-primary:hover::after { transform: translateX(100%); }
+  .btn-saffron { @apply btn bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg shadow-orange-500/30 hover:brightness-110 active:scale-95; }
+  .btn-green { @apply btn bg-gradient-to-r from-emerald-600 to-green-500 text-white shadow-lg shadow-emerald-500/30 hover:brightness-110 active:scale-95; }
+  .btn-danger { @apply btn border border-rose-200 bg-rose-50 text-rose-700 hover:bg-rose-100; }
+  .btn-ghost { @apply btn border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:border-indigo-200; }
+  .input { @apply w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10; }
+  .label { @apply mb-1.5 block text-sm font-medium text-slate-700; }
+
+  .gradient-text {
+    background-image: linear-gradient(90deg, #f97316, #4f46e5, #16a34a, #f97316);
+    background-size: 200% auto;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: shine 6s linear infinite;
+  }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+  .reveal.show { opacity: 1; transform: none; }
+  .bg-grid {
+    background-image: linear-gradient(to right, rgba(79,70,229,.07) 1px, transparent 1px), linear-gradient(to bottom, rgba(79,70,229,.07) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+  .marquee-mask { -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+  .glow-ring { position: relative; }
+  .glow-ring::before { content: ''; position: absolute; inset: -2px; border-radius: inherit; background: linear-gradient(135deg, #f97316, #6366f1, #16a34a); z-index: -1; filter: blur(14px); opacity: .45; }
+}
+
+@keyframes shine { to { background-position: 200% center; } }
+@keyframes blob { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(40px,-30px) scale(1.12); } 66% { transform: translate(-30px,30px) scale(.92); } }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes pulseRing { 0% { box-shadow: 0 0 0 0 rgba(99,102,241,.5); } 100% { box-shadow: 0 0 0 16px rgba(99,102,241,0); } }
+@keyframes confetti { 0% { transform: translateY(-20px) rotate(0); opacity: 1; } 100% { transform: translateY(110vh) rotate(720deg); opacity: .9; } }
+@keyframes grow { from { width: 0; } }
+
+.animate-blob { animation: blob 14s ease-in-out infinite; }
+.animate-marquee { animation: marquee 38s linear infinite; }
+.animate-marquee:hover { animation-play-state: paused; }
+.animate-pulse-ring { animation: pulseRing 1.6s ease-out infinite; }
+.animate-grow { animation: grow 1.1s cubic-bezier(.2,.7,.2,1) both; }
+.confetti { position: absolute; top: 0; width: 10px; height: 16px; border-radius: 2px; animation: confetti linear forwards; }
+
+@@@FILE app/layout.js
+import './globals.css';
+import Link from 'next/link';
+import { Inter } from 'next/font/google';
+import Navbar from '@/components/Navbar';
+import { Scale } from 'lucide-react';
+
+const inter = Inter({ subsets: ['latin'] });
+
+export const metadata = {
+  title: 'RTI·AI – Smart Right to Information Portal',
+  description: 'File, track and receive RTI responses faster with AI-assisted triage and drafting.',
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+          <div className="bg-grid absolute inset-0" />
+          <div className="animate-blob absolute -left-32 -top-32 h-[30rem] w-[30rem] rounded-full bg-indigo-300/40 blur-3xl" />
+          <div className="animate-blob absolute right-0 top-40 h-[28rem] w-[28rem] rounded-full bg-orange-200/50 blur-3xl" style={{ animationDelay: '-4s' }} />
+          <div className="animate-blob absolute bottom-0 left-1/3 h-[28rem] w-[28rem] rounded-full bg-emerald-200/40 blur-3xl" style={{ animationDelay: '-8s' }} />
+        </div>
+        <Navbar />
+        <main className="mx-auto min-h-[75vh] max-w-7xl px-4 py-10">{children}</main>
+        <footer className="mt-10 border-t bg-white/60 backdrop-blur">
+          <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 text-sm text-slate-500 md:grid-cols-3">
+            <div>
+              <p className="flex items-center gap-2 text-lg font-extrabold text-slate-800"><span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-indigo-600 to-violet-600 text-white"><Scale size={16} /></span>RTI·AI</p>
+              <p className="mt-3">AI-assisted, human-approved transparency for every citizen. Built around the Right to Information Act, 2005.</p>
+            </div>
+            <div>
+              <p className="font-bold text-slate-800">Quick links</p>
+              <ul className="mt-3 space-y-1.5">
+                <li><Link href="/submit" className="hover:text-indigo-600">File an RTI</Link></li>
+                <li><Link href="/track" className="hover:text-indigo-600">Track application</Link></li>
+                <li><Link href="/archive" className="hover:text-indigo-600">Public archive</Link></li>
+                <li><Link href="/dashboard" className="hover:text-indigo-600">Dashboard</Link></li>
+              </ul>
+            </div>
+            <div>
+              <p className="font-bold text-slate-800">Timelines</p>
+              <ul className="mt-3 space-y-1.5">
+                <li>Reply within 30 days</li>
+                <li>48 hours for life &amp; liberty</li>
+                <li>First appeal within 30 days (Sec 19)</li>
+                <li>Fee ₹10, BPL exempt</li>
+              </ul>
+            </div>
+          </div>
+          <p className="border-t py-4 text-center text-xs text-slate-400">© RTI·AI Portal • College project demo</p>
+        </footer>
+      </body>
+    </html>
+  );
+}
+
+@@@FILE components/Reveal.js
+'use client';
+import { useEffect, useRef, useState } from 'react';
+
+export default function Reveal({ children, delay = 0, className = '' }) {
+  const ref = useRef(null);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setShow(true); io.disconnect(); }
+    }, { threshold: 0.12 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} style={{ transitionDelay: `${delay}ms` }} className={`reveal ${show ? 'show' : ''} ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+@@@FILE components/Counter.js
+'use client';
+import { useEffect, useRef, useState } from 'react';
+
+export default function Counter({ to = 0, suffix = '', duration = 1500 }) {
+  const ref = useRef(null);
+  const [n, setN] = useState(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let raf;
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      const start = performance.now();
+      const tick = (t) => {
+        const p = Math.min(1, (t - start) / duration);
+        setN(Math.round(to * (1 - Math.pow(1 - p, 3))));
+        if (p < 1) raf = requestAnimationFrame(tick);
+      };
+      raf = requestAnimationFrame(tick);
+    }, { threshold: 0.4 });
+    io.observe(el);
+    return () => { io.disconnect(); cancelAnimationFrame(raf); };
+  }, [to, duration]);
+
+  return <span ref={ref}>{n}{suffix}</span>;
+}
+
+@@@FILE components/RotatingWord.js
+'use client';
+import { useEffect, useState } from 'react';
+
+const WORDS = ['Right to Know', 'Right to Ask', 'Right to Answers', 'Right to Transparency'];
+
+export default function RotatingWord() {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setI((x) => (x + 1) % WORDS.length), 2600);
+    return () => clearInterval(t);
+  }, []);
+  return <span key={i} className="gradient-text inline-block animate-fade-up">{WORDS[i]}</span>;
+}
+
+@@@FILE components/FAQ.js
+'use client';
+import { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
+
+const ITEMS = [
+  ['What is an RTI application?', 'Under the Right to Information Act, 2005 any citizen can ask a public authority for information held by it. The authority must reply within 30 days.'],
+  ['How much does it cost?', 'The application fee is ₹10. Citizens below the poverty line (BPL) are exempt. Extra charges may apply for photocopies or large records.'],
+  ['What if my matter is about life or liberty?', 'Tick the urgent option while filing. Information concerning the life or liberty of a person must be provided within 48 hours.'],
+  ['Does AI send my reply?', 'Never. AI only classifies the request, finds similar past replies and prepares a draft. A Public Information Officer reviews, edits and approves every response.'],
+  ['What if I am not satisfied with the reply?', 'You can file a first appeal under Section 19(1) with the First Appellate Authority within 30 days of receiving the reply.'],
+  ['Can any information be refused?', 'Yes. Section 8 lists exemptions such as national security, personal information or matters that would impede an investigation. The officer must cite the section used.'],
+];
+
+export default function FAQ() {
+  const [open, setOpen] = useState(0);
+  return (
+    <div className="mx-auto max-w-3xl space-y-3">
+      {ITEMS.map(([q, a], i) => (
+        <div key={q} className={`card overflow-hidden transition ${open === i ? 'ring-2 ring-indigo-200' : ''}`}>
+          <button onClick={() => setOpen(open === i ? -1 : i)} className="flex w-full items-center justify-between gap-4 p-5 text-left font-semibold">
+            {q}
+            <ChevronDown size={18} className={`shrink-0 text-indigo-600 transition-transform duration-300 ${open === i ? 'rotate-180' : ''}`} />
+          </button>
+          <div className={`grid transition-all duration-300 ${open === i ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+            <div className="overflow-hidden"><p className="px-5 pb-5 text-sm leading-relaxed text-slate-600">{a}</p></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+@@@FILE components/LiveDemo.js
+'use client';
+import { useEffect, useState } from 'react';
+import { Brain, Search, ShieldAlert, Sparkles, Zap } from 'lucide-react';
+import { getDepartment } from '@/lib/departments';
+
+const SAMPLES = [
+  'Please share tender and contractor details for repair of the pothole road near Rampur village',
+  'List of pending scholarship applications of SC/ST students in the government college',
+  'Number of transformer failures and restoration time in our electricity sub-division',
+  'Stock of medicines and doctors posted at the community health centre',
+];
+
+export default function LiveDemo() {
+  const [text, setText] = useState(SAMPLES[0]);
+  const [res, setRes] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (text.trim().length < 12) { setRes(null); return; }
+    const t = setTimeout(async () => {
+      setLoading(true);
+      try {
+        const r = await fetch('/api/analyze', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }) });
+        setRes(await r.json());
+      } catch {}
+      setLoading(false);
+    }, 450);
+    return () => clearTimeout(t);
+  }, [text]);
+
+  return (
+    <div className="card glow-ring grid gap-6 p-6 md:p-8 lg:grid-cols-2">
+      <div>
+        <p className="flex items-center gap-2 text-sm font-bold text-indigo-600"><Zap size={16} /> Try the AI triage — type any RTI request</p>
+        <textarea value={text} onChange={(e) => setText(e.target.value)} className="input mt-3 min-h-[150px]" placeholder="Describe the information you want…" />
+        <div className="mt-3 flex flex-wrap gap-2">
+          {SAMPLES.map((s, i) => (
+            <button key={i} onClick={() => setText(s)} className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 transition hover:border-indigo-300 hover:bg-indigo-50">Sample {i + 1}</button>
+          ))}
+        </div>
+      </div>
+
+      <div className="rounded-2xl bg-gradient-to-br from-indigo-50 to-violet-50 p-5">
+        {!res?.ready ? (
+          <p className="grid h-full min-h-[150px] place-items-center text-sm text-slate-500">Start typing to see the AI analysis…</p>
+        ) : (
+          <div className={`space-y-4 transition ${loading ? 'opacity-50' : ''}`}>
+            <div className="flex items-center gap-3">
+              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-2xl shadow">{res.department.emoji}</span>
+              <div><p className="text-xs text-slate-500">Routed to</p><p className="font-bold">{res.department.name}</p></div>
+            </div>
+            <div>
+              <div className="mb-1 flex justify-between text-xs"><span className="flex items-center gap-1"><Brain size={13} /> Confidence</span><b>{res.confidence}%</b></div>
+              <div className="h-2.5 overflow-hidden rounded-full bg-white"><div className="animate-grow h-full rounded-full bg-gradient-to-r from-orange-500 via-indigo-500 to-green-500" style={{ width: `${res.confidence}%` }} /></div>
+            </div>
+            {res.keywords?.length > 0 && <div className="flex flex-wrap gap-1.5">{res.keywords.map((k) => <span key={k} className="rounded-full bg-white px-2.5 py-0.5 text-xs font-medium text-indigo-700 shadow-sm">{k}</span>)}</div>}
+            {res.exemptionFlag && <p className="flex gap-2 rounded-xl bg-amber-100 p-3 text-xs text-amber-800"><ShieldAlert size={15} className="shrink-0" /> {res.exemptionFlag}</p>}
+            <div>
+              <p className="mb-1.5 flex items-center gap-1 text-xs font-semibold text-slate-600"><Search size={13} /> Similar past RTIs</p>
+              {res.similar?.length ? res.similar.map((s) => (
+                <p key={s.id} className="mb-1 flex justify-between gap-3 rounded-lg bg-white px-3 py-1.5 text-xs"><span className="truncate">{getDepartment(s.departmentId).emoji} {s.subject}</span><b className="text-emerald-600">{s.score}%</b></p>
+              )) : <p className="text-xs text-slate-500">No precedent yet.</p>}
+            </div>
+            <p className="flex items-center gap-1 text-[11px] text-slate-500"><Sparkles size={12} /> A draft reply is then prepared for the officer to review.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+@@@FILE components/Navbar.js
+'use client';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { Scale, LogOut, Menu, X } from 'lucide-react';
+
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/submit', label: 'File RTI' },
+  { href: '/track', label: 'Track' },
+  { href: '/archive', label: 'Archive' },
+  { href: '/dashboard', label: 'Dashboard' },
+];
+
+export default function Navbar() {
+  const path = usePathname();
+  const [user, setUser] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [pct, setPct] = useState(0);
+
+  useEffect(() => {
+    fetch('/api/auth/me').then((r) => r.json()).then((d) => setUser(d.user));
+    setOpen(false);
+  }, [path]);
+
+  useEffect(() => {
+    const on = () => {
+      const h = document.documentElement;
+      setScrolled(h.scrollTop > 10);
+      setPct((h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight)) * 100);
+    };
+    on();
+    window.addEventListener('scroll', on, { passive: true });
+    return () => window.removeEventListener('scroll', on);
+  }, []);
+
+  const logout = async () => {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    window.location.href = '/';
+  };
+
+  return (
+    <header className="sticky top-0 z-50">
+      <div className="h-1 bg-gradient-to-r from-orange-500 via-white to-green-600" />
+      <div className={`border-b transition duration-300 ${scrolled ? 'border-slate-200 bg-white/85 shadow-lg shadow-indigo-900/5 backdrop-blur-xl' : 'border-transparent bg-white/40 backdrop-blur'}`}>
+        <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+          <Link href="/" className="flex items-center gap-2 text-lg font-extrabold text-slate-900">
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/30">
+              <Scale size={18} />
+            </span>
+            RTI<span className="bg-gradient-to-r from-orange-500 to-green-600 bg-clip-text text-transparent">·AI</span>
+          </Link>
+
+          <div className="hidden items-center gap-1 md:flex">
+            {links.map((l) => (
+              <Link key={l.href} href={l.href}
+                className={`relative rounded-lg px-3 py-2 text-sm font-medium transition ${path === l.href ? 'text-indigo-700' : 'text-slate-600 hover:text-indigo-600'}`}>
+                {l.label}
+                <span className={`absolute inset-x-3 -bottom-0.5 h-0.5 rounded bg-gradient-to-r from-orange-500 to-indigo-600 transition-transform duration-300 ${path === l.href ? 'scale-x-100' : 'scale-x-0'}`} />
+              </Link>
+            ))}
+          </div>
+
+          <div className="hidden items-center gap-3 md:flex">
+            {user ? (
+              <>
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-orange-400 to-indigo-600 text-sm font-bold text-white">{user.name[0]}</span>
+                <div className="leading-tight">
+                  <p className="max-w-[160px] truncate text-sm font-semibold">{user.name}</p>
+                  <p className="text-xs capitalize text-slate-500">{user.role}</p>
+                </div>
+                <button onClick={logout} className="btn-ghost !px-3" title="Logout"><LogOut size={16} /></button>
+              </>
+            ) : (
+              <>
+                <Link href="/login" className="btn-ghost">Login</Link>
+                <Link href="/register" className="btn-primary">Get started</Link>
+              </>
+            )}
+          </div>
+
+          <button className="md:hidden" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
+        </nav>
+
+        {open && (
+          <div className="space-y-1 border-t bg-white px-4 pb-4 md:hidden">
+            {links.map((l) => <Link key={l.href} href={l.href} className="block rounded-lg px-3 py-2 text-sm font-medium hover:bg-slate-100">{l.label}</Link>)}
+            {user
+              ? <button onClick={logout} className="btn-ghost w-full">Logout ({user.name})</button>
+              : <div className="flex gap-2 pt-2"><Link href="/login" className="btn-ghost flex-1">Login</Link><Link href="/register" className="btn-primary flex-1">Register</Link></div>}
+          </div>
+        )}
+        <div className="h-0.5 bg-gradient-to-r from-orange-500 via-indigo-600 to-green-600 transition-[width] duration-150" style={{ width: `${pct}%` }} />
+      </div>
+    </header>
+  );
+}
+
+@@@FILE app/api/analyze/route.js
+import { NextResponse } from 'next/server';
+import { getDB } from '@/lib/db';
+import { ruleBasedAnalyze } from '@/lib/ai';
+import { findSimilar, toSimilar } from '@/lib/rti';
+import { getDepartment } from '@/lib/departments';
+
+export const dynamic = 'force-dynamic';
+
+// Public, lightweight preview: rule-based triage + semantic search (no AI key used, no data saved)
+export async function POST(req) {
+  const { text = '' } = await req.json();
+  if (text.trim().length < 12) return NextResponse.json({ ready: false });
+
+  const a = ruleBasedAnalyze({ subject: text.slice(0, 120), description: text });
+  const hits = findSimilar(getDB(), text, null, 3);
+  const d = getDepartment(a.departmentId);
+
+  return NextResponse.json({
+    ready: true,
+    department: { id: d.id, name: d.name, emoji: d.emoji },
+    confidence: a.confidence,
+    keywords: a.keywords,
+    exemptionFlag: a.exemptionFlag,
+    priority: a.priority,
+    similar: toSimilar(hits),
+  });
+}
+
+@@@FILE app/page.js
+import Link from 'next/link';
+import { FilePlus2, Search, Brain, ShieldCheck, Clock, Sparkles, Route, FileText, ArrowRight, Mic, BarChart3, Languages, CheckCircle2, User, Landmark, Bell } from 'lucide-react';
+import { getStats } from '@/lib/db';
+import { DEPARTMENTS } from '@/lib/departments';
+import Reveal from '@/components/Reveal';
+import Counter from '@/components/Counter';
+import RotatingWord from '@/components/RotatingWord';
+import LiveDemo from '@/components/LiveDemo';
+import FAQ from '@/components/FAQ';
+
+export const dynamic = 'force-dynamic';
+
+export default function Home() {
+  const s = getStats();
+  const stats = [
+    { n: s.total, suf: '+', l: 'RTI Applications' },
+    { n: s.responded, suf: '', l: 'Responses Issued' },
+    { n: s.avgDays, suf: ' days', l: 'Avg. Response Time' },
+    { n: s.departments, suf: '', l: 'Departments Connected' },
+  ];
+  const steps = [
+    { i: FilePlus2, t: 'Submit', d: 'Describe what you need in plain words — type or speak.' },
+    { i: Brain, t: 'AI Triage', d: 'AI categorises the request and picks the right department.' },
+    { i: Search, t: 'Precedent Search', d: 'Semantic search surfaces similar past RTI replies.' },
+    { i: FileText, t: 'Officer Review', d: 'A draft is prepared; the PIO reviews and approves it.' },
+  ];
+  const feats = [
+    { i: Route, t: 'Smart routing', d: 'Keyword, concept and precedent-based routing cuts wrongly addressed RTIs.', c: 'from-indigo-500 to-violet-600' },
+    { i: Sparkles, t: 'AI-drafted replies', d: 'Formal, Act-compliant drafts with placeholders — never auto-sent.', c: 'from-orange-500 to-amber-500' },
+    { i: ShieldCheck, t: 'Exemption alerts', d: 'Flags possible Section 8 exemptions so officers decide with confidence.', c: 'from-emerald-500 to-green-600' },
+    { i: Clock, t: 'Deadline tracking', d: '30-day and 48-hour deadlines with live countdowns and overdue flags.', c: 'from-rose-500 to-pink-600' },
+    { i: Mic, t: 'Voice input', d: 'Dictate your request instead of typing — great on mobile.', c: 'from-sky-500 to-cyan-500' },
+    { i: BarChart3, t: 'Live analytics', d: 'Dashboards with status split, department breakdown and due-soon lists.', c: 'from-fuchsia-500 to-purple-600' },
+  ];
+  const loop = [...DEPARTMENTS, ...DEPARTMENTS];
+
+  return (
+    <div className="space-y-28">
+      {/* HERO */}
+      <section className="grid items-center gap-14 pt-6 lg:grid-cols-2">
+        <div className="animate-fade-up">
+          <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white px-4 py-1.5 text-xs font-semibold text-indigo-700 shadow-sm">
+            <span className="animate-pulse-ring h-2 w-2 rounded-full bg-emerald-500" /> AI-assisted • Human-approved
+          </span>
+          <h1 className="text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-6xl">
+            Your <RotatingWord />,<br /> answered faster.
+          </h1>
+          <p className="mt-6 max-w-xl text-lg text-slate-600">
+            File an RTI in minutes, track it live and receive official responses. Our AI routes your request to the right
+            department and helps officers prepare accurate replies.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href="/submit" className="btn-primary !px-7 !py-3.5 text-base">File an RTI <ArrowRight size={18} /></Link>
+            <Link href="/track" className="btn-ghost !px-7 !py-3.5 text-base">Track application</Link>
+          </div>
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-600">
+            {['Free for BPL citizens', '30-day deadline tracking', 'Officer-approved replies'].map((x) => (
+              <span key={x} className="flex items-center gap-1.5"><CheckCircle2 size={16} className="text-emerald-500" /> {x}</span>
+            ))}
+          </div>
+        </div>
+
+        <div className="relative mx-auto w-full max-w-md animate-fade-up">
+          <div className="absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-br from-orange-300/40 via-indigo-300/40 to-green-300/40 blur-2xl" />
+          <div className="card animate-float p-6">
+            <div className="mb-4 flex items-center justify-between">
+              <span className="text-xs font-bold text-slate-500">RTI-2026-0042</span>
+              <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700">Under Review</span>
+            </div>
+            <p className="font-semibold">Status of repair work on city bypass road</p>
+            <div className="mt-4 space-y-3 rounded-xl bg-indigo-50/70 p-4 text-sm">
+              <p className="flex items-center gap-2"><Brain size={16} className="text-indigo-600" /> Routed to <b>Public Works</b> • 92%</p>
+              <p className="flex items-center gap-2"><Search size={16} className="text-indigo-600" /> 3 similar past RTIs found</p>
+              <p className="flex items-center gap-2"><FileText size={16} className="text-indigo-600" /> Draft ready for PIO review</p>
+            </div>
+            <div className="mt-4 h-2 overflow-hidden rounded-full bg-slate-100"><div className="animate-grow h-full w-2/3 rounded-full bg-gradient-to-r from-orange-500 to-green-600" /></div>
+            <p className="mt-2 text-xs text-slate-500">21 days left of 30</p>
+          </div>
+          <div className="card absolute -left-6 -top-5 hidden animate-float items-center gap-2 px-4 py-2.5 text-xs font-semibold sm:flex" style={{ animationDelay: '-2s' }}><Bell size={14} className="text-orange-500" /> Reply due in 3 days</div>
+          <div className="card absolute -bottom-5 -right-4 hidden animate-float items-center gap-2 px-4 py-2.5 text-xs font-semibold sm:flex" style={{ animationDelay: '-4s' }}><CheckCircle2 size={14} className="text-emerald-500" /> Response approved</div>
+        </div>
+      </section>
+
+      {/* MARQUEE */}
+      <section className="marquee-mask overflow-hidden">
+        <div className="animate-marquee flex w-max gap-3">
+          {loop.map((d, i) => (
+            <span key={i} className="whitespace-nowrap rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-medium shadow-sm">{d.emoji} {d.name}</span>
+          ))}
+        </div>
+      </section>
+
+      {/* STATS */}
+      <Reveal>
+        <section className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+          {stats.map((x) => (
+            <div key={x.l} className="card card-hover p-6 text-center">
+              <p className="gradient-text text-4xl font-extrabold"><Counter to={x.n} suffix={x.suf} /></p>
+              <p className="mt-1 text-sm text-slate-500">{x.l}</p>
+            </div>
+          ))}
+        </section>
+      </Reveal>
+
+      {/* HOW IT WORKS */}
+      <section>
+        <Reveal><h2 className="text-center text-3xl font-extrabold">How it works</h2><p className="mt-2 text-center text-slate-500">Four steps from question to answer</p></Reveal>
+        <div className="relative mt-12 grid gap-5 md:grid-cols-4">
+          <div className="absolute left-[12%] right-[12%] top-12 hidden h-0.5 bg-gradient-to-r from-orange-400 via-indigo-500 to-green-500 md:block" />
+          {steps.map((s, i) => (
+            <Reveal key={s.t} delay={i * 120}>
+              <div className="card card-hover relative h-full p-6 text-center">
+                <span className="relative mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-lg shadow-indigo-500/30"><s.i size={24} /></span>
+                <span className="absolute right-4 top-3 text-5xl font-black text-slate-100">{i + 1}</span>
+                <h3 className="mt-4 font-bold">{s.t}</h3>
+                <p className="mt-1 text-sm text-slate-600">{s.d}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* LIVE DEMO */}
+      <section>
+        <Reveal><h2 className="text-center text-3xl font-extrabold">See the AI in action</h2><p className="mb-8 mt-2 text-center text-slate-500">Type a request — routing, keywords and precedents appear instantly</p></Reveal>
+        <Reveal delay={100}><LiveDemo /></Reveal>
+      </section>
+
+      {/* FEATURES */}
+      <section>
+        <Reveal><h2 className="text-center text-3xl font-extrabold">Everything in one portal</h2></Reveal>
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {feats.map((f, i) => (
+            <Reveal key={f.t} delay={(i % 3) * 100}>
+              <div className="card card-hover group h-full p-6">
+                <span className={`grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br ${f.c} text-white shadow-lg transition duration-300 group-hover:rotate-6 group-hover:scale-110`}><f.i size={22} /></span>
+                <h3 className="mt-4 font-bold">{f.t}</h3>
+                <p className="mt-1 text-sm text-slate-600">{f.d}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ROLES */}
+      <section className="grid gap-6 md:grid-cols-2">
+        <Reveal>
+          <div className="card card-hover h-full p-8">
+            <span className="grid h-12 w-12 place-items-center rounded-2xl bg-orange-100 text-orange-600"><User size={22} /></span>
+            <h3 className="mt-4 text-xl font-extrabold">For citizens</h3>
+            <ul className="mt-3 space-y-2 text-sm text-slate-600">
+              {['File and pay online in minutes', 'Live status timeline and countdown', 'Read official replies in your dashboard', 'Search the public archive of past replies'].map((x) => <li key={x} className="flex gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0 text-emerald-500" />{x}</li>)}
+            </ul>
+            <Link href="/register" className="btn-saffron mt-6">Create account</Link>
+          </div>
+        </Reveal>
+        <Reveal delay={120}>
+          <div className="card card-hover h-full p-8">
+            <span className="grid h-12 w-12 place-items-center rounded-2xl bg-indigo-100 text-indigo-600"><Landmark size={22} /></span>
+            <h3 className="mt-4 text-xl font-extrabold">For officers (PIO)</h3>
+            <ul className="mt-3 space-y-2 text-sm text-slate-600">
+              {['AI insights, confidence and exemption alerts', 'Editable AI draft with precedent guidance', 'Approve, reject or transfer under Sec 6(3)', 'Overdue and urgent filters at a glance'].map((x) => <li key={x} className="flex gap-2"><CheckCircle2 size={16} className="mt-0.5 shrink-0 text-emerald-500" />{x}</li>)}
+            </ul>
+            <Link href="/login" className="btn-primary mt-6">Officer demo login</Link>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* FAQ */}
+      <section>
+        <Reveal><h2 className="mb-8 text-center text-3xl font-extrabold">Frequently asked questions</h2></Reveal>
+        <Reveal delay={100}><FAQ /></Reveal>
+      </section>
+
+      {/* CTA */}
+      <Reveal>
+        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-700 via-violet-700 to-indigo-900 p-12 text-center text-white shadow-2xl">
+          <div className="animate-blob absolute -left-10 -top-10 h-56 w-56 rounded-full bg-orange-400/30 blur-3xl" />
+          <div className="animate-blob absolute -bottom-10 -right-10 h-56 w-56 rounded-full bg-green-400/30 blur-3xl" style={{ animationDelay: '-6s' }} />
+          <h2 className="relative text-3xl font-extrabold sm:text-4xl">Transparency starts with a question.</h2>
+          <p className="relative mx-auto mt-3 max-w-xl text-indigo-100">Demo logins — Citizen: citizen@example.com / citizen123 • Officer: officer.health@gov.in / officer123</p>
+          <div className="relative mt-6 flex flex-wrap justify-center gap-3">
+            <Link href="/login" className="btn bg-white !px-8 !py-3 text-indigo-700 hover:bg-indigo-50">Try the demo</Link>
+            <Link href="/submit" className="btn border border-white/40 !px-8 !py-3 text-white hover:bg-white/10">File an RTI</Link>
+          </div>
+        </section>
+      </Reveal>
+    </div>
+  );
+}
+
+@@@FILE app/submit/page.js
+'use client';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { Send, Brain, Search, CheckCircle2, Info, Mic, Sparkles, ShieldAlert, Lightbulb } from 'lucide-react';
+import { getDepartment } from '@/lib/departments';
+import { fmtDate } from '@/lib/utils';
+
+const EXAMPLES = [
+  { s: 'Road repair status near Rampur village', d: 'Please provide the tender details, contractor name, sanctioned amount and current status of repair work of the pothole-ridden road connecting Rampur village to the district highway.' },
+  { s: 'Pending scholarship applications at Govt College', d: 'Kindly provide the list of pending scholarship applications of SC/ST students at the Government College for the last academic year along with reasons for delay.' },
+  { s: 'Medicine stock at community health centre', d: 'Please provide the month-wise stock position of essential medicines and the number of doctors and nurses posted at the Community Health Centre for the last financial year.' },
+];
+
+const COLORS = ['#f97316', '#6366f1', '#16a34a', '#eab308', '#ec4899', '#06b6d4'];
+
+function Confetti() {
+  return (
+    <div className="pointer-events-none fixed inset-0 z-[60] overflow-hidden">
+      {Array.from({ length: 48 }).map((_, i) => (
+        <span key={i} className="confetti" style={{ left: `${(i * 37) % 100}%`, background: COLORS[i % COLORS.length], animationDelay: `${(i % 12) * 0.1}s`, animationDuration: `${2.4 + (i % 5) * 0.35}s` }} />
+      ))}
+    </div>
+  );
+}
+
+export default function Submit() {
+  const [f, setF] = useState({ subject: '', description: '', bpl: false, urgent: false });
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState('');
+  const [res, setRes] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [pLoading, setPLoading] = useState(false);
+  const [listening, setListening] = useState(false);
+
+  // live AI preview while typing
+  useEffect(() => {
+    const text = `${f.subject} ${f.description}`.trim();
+    if (text.length < 20) { setPreview(null); return; }
+    const t = setTimeout(async () => {
+      setPLoading(true);
+      try {
+        const r = await fetch('/api/analyze', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }) });
+        setPreview(await r.json());
+      } catch {}
+      setPLoading(false);
+    }, 600);
+    return () => clearTimeout(t);
+  }, [f.subject, f.description]);
+
+  const startVoice = () => {
+    const SR = typeof window !== 'undefined' && (window.SpeechRecognition || window.webkitSpeechRecognition);
+    if (!SR) return setErr('Voice input is not supported in this browser. Please use Google Chrome.');
+    setErr('');
+    const rec = new SR();
+    rec.lang = 'en-IN';
+    rec.onresult = (e) => setF((p) => ({ ...p, description: `${p.description} ${e.results[0][0].transcript}`.trim() }));
+    rec.onend = () => setListening(false);
+    rec.onerror = () => setListening(false);
+    setListening(true);
+    rec.start();
+  };
+
+  const submit = async (e) => {
+    e.preventDefault();
+    setLoading(true); setErr('');
+    const r = await fetch('/api/rti', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(f) });
+    const d = await r.json();
+    setLoading(false);
+    if (!r.ok) return setErr(d.error);
+    setRes(d);
+  };
+
+  if (res) {
+    const dept = getDepartment(res.record.departmentId);
+    return (
+      <div className="mx-auto max-w-2xl animate-fade-up">
+        <Confetti />
+        <div className="card glow-ring p-8 text-center">
+          <CheckCircle2 className="mx-auto text-emerald-500" size={60} />
+          <h1 className="mt-3 text-2xl font-extrabold">Application submitted!</h1>
+          <p className="text-slate-500">Save your tracking ID</p>
+          <p className="gradient-text mx-auto mt-3 w-fit rounded-xl bg-indigo-50 px-6 py-3 text-3xl font-extrabold tracking-wider">{res.record.id}</p>
+
+          <div className="mt-6 space-y-3 rounded-2xl bg-slate-50 p-5 text-left text-sm">
+            <p className="flex items-center gap-2"><Brain size={16} className="text-indigo-600" /> AI routed your request to <b>{dept.emoji} {dept.name}</b> ({res.confidence}% confidence)</p>
+            <p className="flex items-center gap-2"><Search size={16} className="text-indigo-600" /> {res.similarCount} similar past RTI record(s) found for the officer</p>
+            <p className="flex items-center gap-2"><Info size={16} className="text-indigo-600" /> Reply due by <b>{fmtDate(res.record.dueDate)}</b> • Fee: ₹{res.record.fee}</p>
+          </div>
+
+          <div className="mt-6 flex justify-center gap-3">
+            <Link href={`/application/${res.record.id}`} className="btn-primary">View application</Link>
+            <Link href="/dashboard" className="btn-ghost">Dashboard</Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const len = f.description.trim().length;
+  const pct = Math.min(100, Math.round((len / 30) * 100));
+  const dept = preview?.ready ? preview.department : null;
+
+  return (
+    <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-3">
+      <form onSubmit={submit} className="card animate-fade-up space-y-5 p-8 lg:col-span-2">
+        <div>
+          <h1 className="text-2xl font-extrabold">File a new <span className="gradient-text">RTI application</span></h1>
+          <p className="text-sm text-slate-500">Ask for specific, existing information held by a public authority.</p>
+        </div>
+        <div>
+          <label className="label">Subject</label>
+          <input className="input" required value={f.subject} onChange={(e) => setF({ ...f, subject: e.target.value })} placeholder="e.g. Status of repair work on city bypass road" />
+        </div>
+        <div>
+          <div className="flex items-center justify-between">
+            <label className="label">Information requested</label>
+            <button type="button" onClick={startVoice} className={`mb-1.5 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold transition ${listening ? 'animate-pulse-ring bg-rose-500 text-white' : 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100'}`}>
+              <Mic size={13} /> {listening ? 'Listening…' : 'Speak'}
+            </button>
+          </div>
+          <textarea className="input min-h-[180px]" required value={f.description} onChange={(e) => setF({ ...f, description: e.target.value })} placeholder="Describe exactly what records, documents or data you need, and the period they relate to…" />
+          <div className="mt-2 flex items-center gap-3">
+            <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100"><div className={`h-full rounded-full transition-all duration-500 ${pct >= 100 ? 'bg-emerald-500' : 'bg-gradient-to-r from-orange-500 to-indigo-500'}`} style={{ width: `${pct}%` }} /></div>
+            <span className="text-xs text-slate-400">{len} chars {pct >= 100 ? '✓' : '(min 30)'}</span>
+          </div>
+        </div>
+        <label className="flex items-center gap-3 text-sm"><input type="checkbox" className="h-4 w-4 accent-indigo-600" checked={f.bpl} onChange={(e) => setF({ ...f, bpl: e.target.checked })} /> I belong to a Below Poverty Line (BPL) family — fee exempted</label>
+        <label className="flex items-center gap-3 text-sm"><input type="checkbox" className="h-4 w-4 accent-rose-600" checked={f.urgent} onChange={(e) => setF({ ...f, urgent: e.target.checked })} /> Concerns the life or liberty of a person (reply within 48 hours)</label>
+        {err && <p className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">{err}</p>}
+        <button className="btn-primary w-full !py-3" disabled={loading}><Send size={16} /> {loading ? 'AI is analysing your request…' : `Submit (Fee ₹${f.bpl ? 0 : 10})`}</button>
+      </form>
+
+      <aside className="space-y-4">
+        <div className="card glow-ring p-5">
+          <h3 className="flex items-center gap-2 font-bold"><Sparkles size={16} className="text-violet-600" /> Live AI preview</h3>
+          {!dept ? (
+            <p className="mt-3 text-sm text-slate-500">Start describing your request — the AI will show the likely department as you type.</p>
+          ) : (
+            <div className={`mt-3 space-y-3 transition ${pLoading ? 'opacity-50' : ''}`}>
+              <div className="flex items-center gap-3 rounded-xl bg-indigo-50 p-3">
+                <span className="text-2xl">{dept.emoji}</span>
+                <div><p className="text-xs text-slate-500">Likely department</p><p className="text-sm font-bold">{dept.name}</p></div>
+              </div>
+              <div>
+                <div className="mb-1 flex justify-between text-xs"><span>Confidence</span><b>{preview.confidence}%</b></div>
+                <div className="h-2 overflow-hidden rounded-full bg-slate-100"><div className="animate-grow h-full rounded-full bg-gradient-to-r from-orange-500 to-green-600" style={{ width: `${preview.confidence}%` }} /></div>
+              </div>
+              {preview.exemptionFlag && <p className="flex gap-2 rounded-xl bg-amber-50 p-3 text-xs text-amber-800"><ShieldAlert size={15} className="shrink-0" /> May be partly exempt: {preview.exemptionFlag}</p>}
+              <p className="text-xs font-semibold text-slate-600">{preview.similar?.length || 0} similar past RTI(s) found</p>
+            </div>
+          )}
+        </div>
+        <div className="card p-5">
+          <h3 className="font-bold">Quick examples</h3>
+          <div className="mt-3 space-y-2">
+            {EXAMPLES.map((x) => (
+              <button key={x.s} type="button" onClick={() => setF({ ...f, subject: x.s, description: x.d })} className="w-full rounded-xl border border-slate-200 bg-white p-3 text-left text-sm transition hover:-translate-y-0.5 hover:border-indigo-300 hover:bg-indigo-50">{x.s}</button>
+            ))}
+          </div>
+        </div>
+        <div className="card p-5 text-sm text-slate-600">
+          <h3 className="flex items-center gap-2 font-bold text-slate-800"><Lightbulb size={16} className="text-amber-500" /> Tips</h3>
+          <ul className="mt-2 list-disc space-y-1 pl-5">
+            <li>Ask for records, not opinions.</li>
+            <li>Mention dates, places and scheme names.</li>
+            <li>Avoid personal data of third parties.</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  );
+}
+
+@@@FILE app/dashboard/page.js
+'use client';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { FilePlus2, Inbox, AlertTriangle, CheckCircle2, Clock, ArrowRight, Search } from 'lucide-react';
+import StatusBadge from '@/components/StatusBadge';
+import Counter from '@/components/Counter';
+import { getDepartment } from '@/lib/departments';
+import { fmtDate, daysLeft } from '@/lib/utils';
+
+function Stat({ icon: Icon, label, value, color }) {
+  return (
+    <div className="card card-hover flex items-center gap-4 p-5">
+      <span className={`grid h-12 w-12 place-items-center rounded-2xl ${color}`}><Icon size={22} /></span>
+      <div><p className="text-2xl font-extrabold"><Counter to={value} duration={900} /></p><p className="text-xs text-slate-500">{label}</p></div>
+    </div>
+  );
+}
+
+export default function Dashboard() {
+  const [me, setMe] = useState(null);
+  const [list, setList] = useState(null);
+  const [f, setF] = useState('all');
+  const [q, setQ] = useState('');
+
+  useEffect(() => {
+    Promise.all([fetch('/api/auth/me').then((r) => r.json()), fetch('/api/rti').then((r) => r.json())]).then(([m, l]) => {
+      setMe(m.user); setList(l.records || []);
+    });
+  }, []);
+
+  if (!me || !list) return <div className="grid place-items-center py-24"><div className="h-10 w-10 animate-spin rounded-full border-4 border-indigo-200 border-t-indigo-600" /></div>;
+
+  const isOfficer = me.role === 'officer';
+  const now = Date.now();
+  const open = list.filter((r) => r.status === 'under_review');
+  const responded = list.filter((r) => r.status === 'responded');
+  const rejected = list.filter((r) => r.status === 'rejected');
+  const overdue = open.filter((r) => new Date(r.dueDate) < now);
+  const urgent = open.filter((r) => r.urgent);
+  const done = [...responded, ...rejected];
+  const dept = isOfficer ? getDepartment(me.departmentId) : null;
+
+  const filtered = list
+    .filter((r) =>
+      f === 'all' || (f === 'pending' && r.status === 'under_review') || (f === 'urgent' && r.urgent && r.status === 'under_review') ||
+      (f === 'overdue' && r.status === 'under_review' && new Date(r.dueDate) < now) || (f === 'done' && ['responded', 'rejected'].includes(r.status)))
+    .filter((r) => !q || `${r.id} ${r.subject}`.toLowerCase().includes(q.toLowerCase()));
+
+  // analytics
+  const total = Math.max(1, list.length);
+  const p1 = (open.length / total) * 100;
+  const p2 = p1 + (responded.length / total) * 100;
+  const donut = `conic-gradient(#f59e0b 0 ${p1}%, #10b981 ${p1}% ${p2}%, #f43f5e ${p2}% 100%)`;
+  const byDept = Object.entries(list.reduce((a, r) => ({ ...a, [r.departmentId]: (a[r.departmentId] || 0) + 1 }), {})).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  const dueSoon = [...open].sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate)).slice(0, 4);
+
+  return (
+    <div className="animate-fade-up space-y-8">
+      <div className="card relative overflow-hidden bg-gradient-to-r from-indigo-600 to-violet-700 p-7 text-white">
+        <div className="animate-blob absolute -right-10 -top-10 h-48 w-48 rounded-full bg-orange-400/30 blur-3xl" />
+        <div className="relative flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-extrabold">{isOfficer ? `${dept.emoji} ${dept.name}` : `Namaste, ${me.name.split(' ')[0]} 👋`}</h1>
+            <p className="text-indigo-100">{isOfficer ? 'Public Information Officer console' : 'Your RTI applications at a glance'}</p>
+          </div>
+          {!isOfficer && <Link href="/submit" className="btn bg-white text-indigo-700 hover:bg-indigo-50"><FilePlus2 size={16} /> New RTI</Link>}
+        </div>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <Stat icon={Inbox} label={isOfficer ? 'Total received' : 'Total filed'} value={list.length} color="bg-indigo-100 text-indigo-600" />
+        <Stat icon={Clock} label="Pending" value={open.length} color="bg-amber-100 text-amber-600" />
+        <Stat icon={isOfficer ? AlertTriangle : CheckCircle2} label={isOfficer ? `Overdue • ${urgent.length} urgent` : 'Responded'} value={isOfficer ? overdue.length : responded.length} color={isOfficer ? 'bg-rose-100 text-rose-600' : 'bg-emerald-100 text-emerald-600'} />
+        <Stat icon={CheckCircle2} label="Closed" value={done.length} color="bg-emerald-100 text-emerald-600" />
+      </div>
+
+      {list.length > 0 && (
+        <div className="grid gap-4 lg:grid-cols-3">
+          <div className="card flex items-center gap-6 p-6">
+            <div className="grid h-28 w-28 shrink-0 place-items-center rounded-full" style={{ background: donut }}>
+              <div className="grid h-20 w-20 place-items-center rounded-full bg-white text-center"><p className="text-xl font-extrabold leading-none">{list.length}<span className="block text-[10px] font-medium text-slate-500">total</span></p></div>
+            </div>
+            <ul className="space-y-1.5 text-xs">
+              <li className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-amber-500" /> Pending ({open.length})</li>
+              <li className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-emerald-500" /> Responded ({responded.length})</li>
+              <li className="flex items-center gap-2"><span className="h-2.5 w-2.5 rounded-full bg-rose-500" /> Rejected ({rejected.length})</li>
+            </ul>
+          </div>
+
+          <div className="card p-6 lg:col-span-2">
+            <h3 className="mb-3 font-bold">{isOfficer ? 'Due soonest' : 'By department'}</h3>
+            {isOfficer ? (
+              dueSoon.length ? (
+                <ul className="space-y-2">
+                  {dueSoon.map((r) => { const l = daysLeft(r.dueDate); return (
+                    <li key={r.id}><Link href={`/application/${r.id}`} className="flex items-center justify-between gap-3 rounded-xl bg-slate-50 px-4 py-2.5 text-sm transition hover:bg-indigo-50">
+                      <span className="truncate font-medium">{r.subject}</span>
+                      <b className={l < 0 ? 'text-rose-600' : l <= 5 ? 'text-amber-600' : 'text-slate-500'}>{l < 0 ? `${-l}d overdue` : `${l}d left`}</b>
+                    </Link></li>
+                  ); })}
+                </ul>
+              ) : <p className="text-sm text-slate-500">No pending applications. 🎉</p>
+            ) : (
+              <div className="space-y-3">
+                {byDept.map(([id, n]) => { const d = getDepartment(id); return (
+                  <div key={id}>
+                    <div className="mb-1 flex justify-between text-xs"><span>{d.emoji} {d.name}</span><b>{n}</b></div>
+                    <div className="h-2 overflow-hidden rounded-full bg-slate-100"><div className="animate-grow h-full rounded-full bg-gradient-to-r from-orange-500 to-indigo-600" style={{ width: `${(n / byDept[0][1]) * 100}%` }} /></div>
+                  </div>
+                ); })}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        {isOfficer ? (
+          <div className="flex flex-wrap gap-2">
+            {[['all', 'All'], ['pending', 'Pending'], ['urgent', 'Urgent'], ['overdue', 'Overdue'], ['done', 'Closed']].map(([k, l]) => (
+              <button key={k} onClick={() => setF(k)} className={`rounded-full px-4 py-1.5 text-sm font-semibold transition ${f === k ? 'bg-indigo-600 text-white shadow' : 'bg-white text-slate-600 hover:bg-slate-100'}`}>{l}</button>
+            ))}
+          </div>
+        ) : <h2 className="text-lg font-bold">My applications</h2>}
+        <div className="relative w-full sm:w-72">
+          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <input className="input !pl-9" placeholder="Search by ID or subject…" value={q} onChange={(e) => setQ(e.target.value)} />
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        {filtered.map((r) => {
+          const d = getDepartment(r.departmentId);
+          const left = daysLeft(r.dueDate);
+          const isOpen = r.status === 'under_review';
+          return (
+            <Link key={r.id} href={`/application/${r.id}`} className="card card-hover group flex flex-wrap items-center justify-between gap-4 border-l-4 p-5" style={{ borderLeftColor: r.status === 'responded' ? '#10b981' : r.status === 'rejected' ? '#f43f5e' : '#f59e0b' }}>
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs font-bold text-indigo-600">{r.id}</span>
+                  {r.urgent && <span className="rounded-full bg-rose-100 px-2 py-0.5 text-[11px] font-bold text-rose-600">URGENT</span>}
+                  {isOfficer && r.ai?.confidence != null && <span className="rounded-full bg-violet-100 px-2 py-0.5 text-[11px] font-semibold text-violet-700">AI {r.ai.confidence}%</span>}
+                </div>
+                <p className="mt-1 truncate font-semibold">{r.subject}</p>
+                <p className="text-xs text-slate-500">{isOfficer ? `By ${r.applicantName}` : `${d.emoji} ${d.name}`} • Filed {fmtDate(r.createdAt)}</p>
+              </div>
+              <div className="flex items-center gap-4">
+                {isOpen && <span className={`text-sm font-semibold ${left < 0 ? 'text-rose-600' : left <= 5 ? 'text-amber-600' : 'text-slate-500'}`}>{left < 0 ? `${-left}d overdue` : `${left}d left`}</span>}
+                <StatusBadge status={r.status} />
+                <ArrowRight size={16} className="text-slate-400 transition group-hover:translate-x-1" />
+              </div>
+            </Link>
+          );
+        })}
+        {!filtered.length && (
+          <div className="card p-12 text-center text-slate-500">
+            <p className="text-4xl">📭</p>
+            <p className="mt-2">Nothing here yet. {!isOfficer && <Link href="/submit" className="font-semibold text-indigo-600">File your first RTI →</Link>}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
